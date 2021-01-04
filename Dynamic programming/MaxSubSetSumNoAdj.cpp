@@ -1,24 +1,30 @@
 #include <bits/stdc++.h>
 using namespace std;
-int max(int a,int b){
-    if(a>b) return a;
-    return b;
-}
-int maxAdjSum(int arr[],int size){
-    int first = arr[0];
-    int second = max(arr[0],arr[1]);
-    int i=2,curr;
-    while(i<size){
-        curr = max(second,first+arr[i]);
+
+int maxSumNoAdj(vector<int> v){
+    if (v.size()==1) return v[1];
+    int first = v[0];
+    int second = max(v[0],v[1]);
+    int current;
+    for(int i=2;i<v.size();i++){
+        current = max(first+v[i],second);
         first = second;
-        second = curr;
-        i++;
+        second = current;
     }
     return second;
-}
-int main(){
-    int arr[]={7,10,12,7,9,14};
-    int size = sizeof(arr)/sizeof(arr[0]);
-    cout<<maxAdjSum(arr,size)<<endl;
-    return 0;
+} 
+
+int main() {
+	int cases,size,curr;
+	vector<int> v;
+    cin>>cases;
+	for(int i=0;i<cases;i++){
+	    v={};
+	    cin>>size;
+	    for(int j=0;j<size;j++){
+            cin>>curr;
+            v.push_back(curr);
+        } 
+	    cout<<maxSumNoAdj(v);
+	}
 }
